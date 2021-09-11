@@ -44,7 +44,7 @@ def fill_encode_order_matrix(order_matrix: ndarray, curry_orders_cust: list,
         
     return order_matrix
 
-def process_orders(num_curries, curry_orders_cust):
+def process_orders(num_curries: int, curry_orders_cust: list):
     """
     Process orders to prepare the final curry mix
 
@@ -105,6 +105,7 @@ def process_orders(num_curries, curry_orders_cust):
         curry_index = order_curries.index(l)
         m = 1
         counter = 0
+        checked_max = False
         while (curry_mix[curry_index] == m # already chosen as meat curry
             and counter<20): # to debug just in case
             try:
@@ -117,7 +118,8 @@ def process_orders(num_curries, curry_orders_cust):
                 # No suitable veg curry index found in the mix
                 #   Trying for meat index if there is a max pref of
                 #   meat for the customer
-                if max_curry_pref[i] == 1:
+                if max_curry_pref[i] == 1 and not checked_max:
+                    checked_max = True
                     l = 1
                     m = 0
                     curry_index = order_curries.index(l)
@@ -131,6 +133,7 @@ def process_orders(num_curries, curry_orders_cust):
                     break
         if NO_SOLUTION:
             break
+        print("counter", counter)
         curry_mix[curry_index] = l # final choice of veg or meat
     
     if NO_SOLUTION:

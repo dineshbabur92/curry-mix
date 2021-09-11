@@ -3,5 +3,5 @@
 5 M
 3 M
 2 V 5 V 10 V 6 M
-2 V 5 V 10 V 6 M
+2 V 3 V 10 V 5 M
 2 M
